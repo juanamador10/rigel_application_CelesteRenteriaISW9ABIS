@@ -68,16 +68,12 @@ class DatabaseHelper {
     return await db.insert('products', product.toMap());
   }
 
-  Future<int> deleteProducts(int id) async {
-    Database db = await instance.database;
-    return await db.delete('products', where: 'id = ?', whereArgs: [id]);
-  }
 
-  Future<int> updateProducts(Product product) async {
-    Database db = await instance.database;
-    return await db.update('products', product.toMap(),
-        where: 'id = ?', whereArgs: [product.id]);
-  }
+  //Future<int> updateProducts(Product product) async {
+  // Database db = await instance.database;
+  //  return await db.update('products', product.toMap(),
+  //      where: 'id = ?', whereArgs: [product.id]);
+  //}
 
   Future<List<ShoppingCar>> getShoppingC() async {
     Database db = await instance.database;
