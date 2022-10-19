@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
-import '../screens/product_details_screen.dart';
+import '../screens/add_product_screen.dart';
 class GalleryProduct extends StatelessWidget{
   final String Image_URL;
+  final int SelectedProductID;
 
-  const GalleryProduct({Key? key, required this.Image_URL}):super (key:key);
+  const GalleryProduct({Key? key, required this.Image_URL, required this.SelectedProductID}):super (key:key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,10 +20,9 @@ class GalleryProduct extends StatelessWidget{
         ),
         child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddProductScreen()));
+                        setState(){
+                          
+                        }
                       },
                       child: Image(image: NetworkImage(Image_URL), width: 110,),
                       style: ElevatedButton.styleFrom(

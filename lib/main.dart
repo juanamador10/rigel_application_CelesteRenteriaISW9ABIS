@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rigel_application/screens/add_product_screen.dart';
 import 'package:rigel_application/screens/home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

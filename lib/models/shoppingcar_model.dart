@@ -2,7 +2,7 @@ class ShoppingCar {
   //int id
   final int? id;
   final String title;
-  final int price;
+  final double price;
   final int quantity;
 
 //no importa el orden en el que se pasen los parametros
