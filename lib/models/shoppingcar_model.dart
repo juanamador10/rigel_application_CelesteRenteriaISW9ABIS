@@ -4,14 +4,18 @@ class ShoppingCar {
   final String title;
   final double price;
   final int quantity;
+  final String imagepath;
+  var subtotal;
 
 //no importa el orden en el que se pasen los parametros
   //required this.id, ver como le puedo quitar el id
-  ShoppingCar({
+  ShoppingCar( {
     this.id,
     required this.price,
     required this.title, 
-    required this.quantity
+    required this.quantity,
+    required this.imagepath,
+    this.subtotal
     });
 
   factory ShoppingCar.fromMap(Map<String, dynamic> json) => ShoppingCar(
@@ -19,6 +23,8 @@ class ShoppingCar {
     title: json['title'],
     price: json['price'],
     quantity: json['quantity'],
+    imagepath: json['imagepath'],
+    subtotal: json['subtotal']
     );
 
 
@@ -27,7 +33,9 @@ class ShoppingCar {
       'id': id, 
       'price':price,
       'title': title,
-      'quantity':quantity
+      'quantity':quantity,
+      'imagepath':imagepath,
+      'subtotal':price*quantity
       };
   }
 }

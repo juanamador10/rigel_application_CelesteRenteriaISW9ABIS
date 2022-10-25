@@ -20,7 +20,7 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  int productQuantity = 0;
+  int productQuantity = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,6 +196,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                     QuantityInput(
                                                         buttonColor:
                                                             Colors.black,
+                                                            acceptsZero: false,
+                                                          
+                                                            minValue: 1,
                                                         value: productQuantity,
                                                         onChanged: (value) => setState(
                                                             () => productQuantity =
@@ -216,13 +219,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                       FloatingActionButton
                                                           .extended(
                                                               onPressed:()async {
-                                                                DatabaseHelper_ShoppingC.instance.addShoppingC(ShoppingCar(price: product.price, title: product.title,quantity: productQuantity));
+                                                               
+
+                                                                DatabaseHelper_ShoppingC.instance.addShoppingC(ShoppingCar(price: product.price, title: product.title,quantity: productQuantity, imagepath: product.imagepath));
                                                                 Navigator.push(
                                                                     context,
                                                                     MaterialPageRoute(
                                                                         builder:
                                                                             (context) =>
-                                                                                ShoppingCarScreen(productQuantity:productQuantity,)));
+                                                                                ShoppingCarScreen(ProductPrice: product.price,
+                                                                                  productQuantity:productQuantity,ProductName: product.title)));
                                                               },
                                                               label: const Text(
                                                                   "Add to the car",
