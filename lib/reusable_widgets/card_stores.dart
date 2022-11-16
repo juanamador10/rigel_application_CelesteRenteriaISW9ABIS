@@ -178,8 +178,8 @@ class StoresDrawer extends StatelessWidget {
                       builder: (context) => InternationalScreen()));
             },
           ),
-          ListTile(
-            title: const Text("------------"),
+          const ListTile(
+            title: Text("------------"),
           ),
           ListTile(
             title: const Text("See Favorite Stores"),
@@ -188,6 +188,7 @@ class StoresDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => FavoriteStores()));
             },
           ),
+          // ignore: prefer_const_constructors
           ListTile(
             title: const Text("------------"),
           ),
