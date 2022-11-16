@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:rigel_application/helpers/database_helper_products.dart';
 import 'package:rigel_application/screens/add_product_screen.dart';
+import 'package:rigel_application/screens/countries_screen.dart';
 import 'package:rigel_application/screens/product_details_screen.dart';
 import '../models/product_model.dart';
 import '../reusable_widgets/galerie_products.dart';
+import 'country_screen2.dart';
+import 'currency_screen.dart';
+import 'international_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,10 +19,43 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String SelectedCategory = "Cookies";
-  String ProductName="Galletas Solidarias";
+  String ProductName = "Galletas Solidarias";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(elevation: 0, backgroundColor: Colors.orange[300]),
+        drawer: Drawer(
+            child: ListView(padding: EdgeInsets.zero,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+              const DrawerHeader(
+                  child: Text("Menu",
+                      style: TextStyle(color: Colors.black, fontSize: 20))),
+              ListTile(
+                title: const Text("Countries"),
+                onTap: () {
+                  final route = MaterialPageRoute(
+                      builder: (context) => CountryScreen2());
+                  Navigator.push(context, route);
+                },
+              ),
+              ListTile(
+                title: const Text("International Stores"),
+                onTap: () {
+                  final route = MaterialPageRoute(
+                      builder: (context) => InternationalScreen());
+                  Navigator.push(context, route);
+                },
+              ),
+              ListTile(
+                title: const Text("Currency"),
+                onTap: () {
+                  final route =
+                      MaterialPageRoute(builder: (context) => CurrencyScreen());
+                  Navigator.push(context, route);
+                },
+              )
+            ])),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -26,12 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 70),
-                Row(children: const [
-                  Icon(Icons.menu, size: 30),
-                  Spacer(),
-                  Icon(Icons.shopping_bag, size: 30)
-                ]),
+                
+
                 const SizedBox(height: 20),
                 const Text("Hello"),
                 const Text("What today's taste?",
@@ -101,7 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: Colors.orange[300]),
                       child: FutureBuilder<List<Product>>(
-                          future: DatabaseHelper.instance.getOneProduct(ProductName),
+                          future: DatabaseHelper.instance
+                              .getOneProduct(ProductName),
                           builder: (BuildContext context,
                               AsyncSnapshot<List<Product>> snapshot) {
                             if (!snapshot.hasData) {
@@ -120,18 +154,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ? Center(
                                       child: Container(
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius: BorderRadius.circular(8.0),
-                                                child: Image(image: NetworkImage("https://cdn.shopify.com/s/files/1/2531/9922/articles/70968265_562897317789221_8160954985052372992_n_600x.jpg?v=1569606497"), height: 200,)),
-                                              const Text("Select a Product",
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.white,
-                                                      fontSize: 20)),
-                                            ],
-                                          )))
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image(
+                                              image: NetworkImage(
+                                                  "https://cdn.shopify.com/s/files/1/2531/9922/articles/70968265_562897317789221_8160954985052372992_n_600x.jpg?v=1569606497"),
+                                              height: 200,
+                                            )),
+                                        const Text("Select a Product",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontSize: 20)),
+                                      ],
+                                    )))
                                   : ListView(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
@@ -143,7 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 children: [
                                                   SizedBox(height: 10),
                                                   ClipRRect(
-                                                    borderRadius: BorderRadius.circular(8.0),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
                                                     child: Image(
                                                       image: NetworkImage(
                                                           product.imagepath),
@@ -256,62 +298,82 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                    FutureBuilder<List<Product>>(
-              future: DatabaseHelper.instance.getProductsCategory(SelectedCategory),
-              builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot){
-                if(!snapshot.hasData){
-                  return Center(
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: const Text("Loading...",style: TextStyle(
-                          fontWeight: FontWeight.bold,color: Colors.black,fontSize: 20)),
-                      ),
-                    );
-                } else {
-                  return snapshot.data!.isEmpty 
-                  ? Center(
-                    child: Container(child: const Text("No products", style: TextStyle(
+                      FutureBuilder<List<Product>>(
+                          future: DatabaseHelper.instance
+                              .getProductsCategory(SelectedCategory),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<List<Product>> snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: Container(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: const Text("Loading...",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontSize: 20)),
+                                ),
+                              );
+                            } else {
+                              return snapshot.data!.isEmpty
+                                  ? Center(
+                                      child: Container(
+                                          child: const Text("No products",
+                                              style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
                                                   fontSize: 20))))
-                  :  Container(
-                    height: 120,
-                    
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      children: snapshot.data!.map((product) {
-                        return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 90,
-        height: 90,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle, color: Colors.orange[300]
-        ),
-        child: ElevatedButton(
-                      onPressed: () {
-                        setState((){
-                          ProductName=product.title;
-                        });
-                        print(product.category);
-                      },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image(image: NetworkImage(product.imagepath), width: 110,)),
-                      style: ElevatedButton.styleFrom(
-                          shape: CircleBorder(),
-                          shadowColor: Colors.transparent,
-                          primary: Colors.transparent,
-                          ),
-                    )
-      ),
-    );
-                      },
-                    ).toList()),
-                  );
-                }
-              }),
+                                  : Container(
+                                      height: 120,
+                                      child: ListView(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          children: snapshot.data!.map(
+                                            (product) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                    width: 90,
+                                                    height: 90,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color:
+                                                            Colors.orange[300]),
+                                                    child: ElevatedButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          ProductName =
+                                                              product.title;
+                                                        });
+                                                        print(product.category);
+                                                      },
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                          child: Image(
+                                                            image: NetworkImage(
+                                                                product
+                                                                    .imagepath),
+                                                            width: 110,
+                                                          )),
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        shape: CircleBorder(),
+                                                        shadowColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                      ),
+                                                    )),
+                                              );
+                                            },
+                                          ).toList()),
+                                    );
+                            }
+                          }),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
