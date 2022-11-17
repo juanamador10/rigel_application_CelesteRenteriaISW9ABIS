@@ -105,7 +105,7 @@ class FutureBuilderForStores extends StatelessWidget {
         future: method,
         builder: ((context, snapshot) {
           return SizedBox(
-            height: 900,
+            height: MediaQuery.of(context).size.height/1.2,
             child: ListView.builder(
               itemCount: listdocs.length,
               shrinkWrap: true,
