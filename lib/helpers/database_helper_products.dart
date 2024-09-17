@@ -57,9 +57,6 @@ class DatabaseHelper {
 Future<List<Product>> getProductsCategory(String Selectedcategory) async {
     Database db = await instance.database;
     var productquery = await db.query('products', orderBy: 'title', where: 'category = ?', whereArgs: [Selectedcategory]);
-
-    //si no es empty ? (entonces)... has esto :(else) si no se cumple regresame la lista vacia
-    //Ternalia dicen
     List<Product> productList = productquery.isNotEmpty
         ? productquery.map((e) => Product.fromMap(e)).toList()
         : [];

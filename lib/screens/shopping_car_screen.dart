@@ -51,7 +51,7 @@ class _ShoppingCarScreenState extends State<ShoppingCarScreen> {
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_rounded,
-              color: Colors.black,
+              
             ),
             iconSize: 30,
             onPressed: () {

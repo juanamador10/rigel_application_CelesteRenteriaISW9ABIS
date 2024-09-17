@@ -13,7 +13,6 @@ class AddProductScreen extends StatefulWidget {
 
 class _AddProductScreenState extends State<AddProductScreen> {
   final textControllerTitle = TextEditingController();
-  
  final textControllerCategory = TextEditingController();
   final textControllerPrice = TextEditingController();
   final textControllerDescription = TextEditingController();

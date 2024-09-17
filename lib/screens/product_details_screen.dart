@@ -32,7 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_rounded,
-            color: Colors.black,
+            
           ),
           iconSize: 30,
           onPressed: () {
